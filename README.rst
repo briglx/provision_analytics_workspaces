@@ -80,5 +80,15 @@ Now that you have all test dependencies installed, you can run tests on the proj
     pylint script
     pydocstyle script
 
+Build Docker Images
+-------------------
+
+Build and run your image. From the command line
+
+.. code-block:: bash
+
+    > docker build --pull --rm -f "dockerfile" -t provisionanalyticsworkspaces:latest "."
+    > docker run --rm -it provisionanalyticsworkspaces:latest
+
 .. |screenshot-pipeline| image:: https://raw.github.com/briglx/provision_analytics_workspaces/master/docs/Architecture.png
 
