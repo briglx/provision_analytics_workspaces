@@ -2,7 +2,7 @@
 Azure Provision Analytics Workspaces
 **********************************
 
-This project demonstraites how to provision analytics workspaces on Azure using several technologies:
+This project demonstrates how to provision analytics workspaces on Azure using several technologies:
 
 - Python Azure API
 - Docker Images
