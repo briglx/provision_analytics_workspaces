@@ -1,6 +1,6 @@
-**********************************
+************************************
 Azure Provision Analytics Workspaces
-**********************************
+************************************
 
 This project demonstrates how to provision analytics workspaces on Azure using several technologies:
 
@@ -10,12 +10,13 @@ This project demonstrates how to provision analytics workspaces on Azure using s
 - Azure Container Registry
 - Azure Functions
 
-
 |screenshot-pipeline|
-
 
 Setup
 =====
+
+Resource Group
+--------------
 
 Create a resource group for this project
 
@@ -23,13 +24,19 @@ Create a resource group for this project
 
     az group create --name provisionAnalyticsWorkspaces --location eastus
 
+Docker Registry
+---------------
+
 Create a Private Docker Reposity in Azure
 
 .. code-block:: bash
 
     az acr create --resource-group provisionAnalyticsWorkspaces --name pawContainerRegistry --sku Basic
 
-Take note of `loginServer` in the output, which is the fully qualified registry name (all lowercase). Throughout the rest of this document `<registry-name>` is a placeholder for the container registry name, and `<login-server>` is a placeholder for the registry's login server name.
+Take note of ``loginServer`` in the output, which is the fully qualified registry name (all lowercase). Throughout the rest of this document ``<registry-name>`` is a placeholder for the container registry name, and ``<login-server>`` is a placeholder for the registry's login server name.
+
+Service Principal
+-----------------
 
 Create a Service Principal on Azure (Pull Images).
 
@@ -42,6 +49,9 @@ Create the service principal and save the secrets
     az ad sp create-for-rbac --name sp_paw_test_container_repo --skip-assignment --sdk-auth > local-sp.json
 
 Notice the username and password are saved to the file `local-sp.json`
+
+Role assignment
+---------------
 
 Next we have to assign the `Azure Container Registry Pull` role-assignment to the new service principal
 
@@ -57,6 +67,9 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
     # Show the role assignment
     az role assignment list --assignee $SERVICE_PRINCIPAL_ID
 
+Azure Container Instance
+------------------------
+
 Create Azure Container Instance
 
 Copy the file `deploy-aci-example.yaml` as `deploy-aci.yaml`
@@ -70,9 +83,6 @@ Edit the file `deploy-aci.yaml` and update with the correct values:
 .. code-block:: bash
 
     az container create --resource-group provisionAnalyticsWorkspaces --file deploy-aci.yaml
-
-
-
 
 
 Development
