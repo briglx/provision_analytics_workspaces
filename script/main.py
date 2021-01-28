@@ -4,8 +4,9 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
+
 def configure_logger():
-    """Configure logger"""
+    """Configure logger."""
     _LOGGER.setLevel(logging.INFO)
     handler = logging.StreamHandler()
     formatter = logging.Formatter(
@@ -13,6 +14,7 @@ def configure_logger():
     )
     handler.setFormatter(formatter)
     _LOGGER.addHandler(handler)
+
 
 if __name__ == "__main__":
     configure_logger()

@@ -144,7 +144,7 @@ Now that you have all test dependencies installed, you can run tests on the proj
 
 .. code-block:: bash
 
-    isort -rc .
+    isort .
     codespell  --skip="./.*,*.csv,*.json,*.pyc,./docs/_build/*,./htmlcov/*"
     black script
     flake8 script
@@ -157,6 +157,7 @@ Build Docker Images
 Build and run your image.
 
 Run Docker Image locally
+
 .. code-block:: bash
 
     > docker build --pull --rm -f "dockerfile" -t provisionanalyticsworkspaces:latest "."
