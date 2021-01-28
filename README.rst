@@ -26,6 +26,7 @@ Create a resource group for this project
 Create a Private Docker Reposity in Azure
 
 .. code-block:: bash
+
     az acr create --resource-group provisionAnalyticsWorkspaces --name pawContainerRegistry --sku Basic
 
 Take note of `loginServer` in the output, which is the fully qualified registry name (all lowercase). Throughout the rest of this document `<registry-name>` is a placeholder for the container registry name, and `<login-server>` is a placeholder for the registry's login server name.
@@ -37,6 +38,7 @@ The solution uses a service principal to pull images from the Private Docker Rep
 Create the service principal and save the secrets
 
 .. code-block:: bash
+
     az ad sp create-for-rbac --name sp_paw_test_container_repo --skip-assignment --sdk-auth > local-sp.json
 
 Notice the username and password are saved to the file `local-sp.json`
