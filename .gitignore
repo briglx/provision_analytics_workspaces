@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+local.env
+.vscode/settings.json
+local-sp.json
+deploy-aci.yaml
