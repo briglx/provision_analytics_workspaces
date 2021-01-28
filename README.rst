@@ -47,7 +47,7 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
 
 .. code-block:: bash
 
-    $SERVICE_PRINCIPAL_ID = "service_principal_clientId>"
+    $SERVICE_PRINCIPAL_ID = "<service_principal_clientId>"
     $ACR_REGISTRY_NAME = "<registry_name>"
     $ACR_REGISTRY_ID = az acr show --name $ACR_REGISTRY_NAME  --query id --output tsv
 
@@ -160,6 +160,7 @@ Run Docker Image locally
 Tag for remote registry
 
 .. code-block:: bash
+
     docker tag provisionanalyticsworkspaces:latest $ACR_REGISTRY_NAME.azurecr.io/provisionanalyticsworkspaces:v1
 
     az acr login --name $ACR_REGISTRY_NAME

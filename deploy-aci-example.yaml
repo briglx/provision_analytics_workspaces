@@ -3,13 +3,14 @@ location: eastus
 name: provision_analytics_workspace_cg
 properties:
   containers:
-  - name: paw_script_container
-    image: <registryname>.azurecr.io/<imagename>:latest
-    ports: []
-    resources:
-      requests:
-        cpu: 1.0
-        memoryInGB: 1.5
+  - name: paw-script-container
+    properties:
+      image: <registryname>.azurecr.io/<imagename>:latest
+      ports: []
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
   osType: Linux
   imageRegistryCredentials:
   - server: <registryname>.azurecr.io
