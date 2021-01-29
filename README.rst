@@ -123,10 +123,10 @@ We use `Black <https://github.com/psf/black>`_ for uncompromised code formatting
 
 Summary of the most relevant points:
 
- - Comments should be full sentences and end with a period.
- - `Imports <https://www.python.org/dev/peps/pep-0008/#imports>`_  should be ordered.
- - Constants and the content of lists and dictionaries should be in alphabetical order.
- - It is advisable to adjust IDE or editor settings to match those requirements.
+- Comments should be full sentences and end with a period.
+- `Imports <https://www.python.org/dev/peps/pep-0008/#imports>`_  should be ordered.
+- Constants and the content of lists and dictionaries should be in alphabetical order.
+- It is advisable to adjust IDE or editor settings to match those requirements.
 
 Ordering of imports
 -------------------
