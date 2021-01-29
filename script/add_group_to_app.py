@@ -31,13 +31,13 @@ access_token = ['access_token']
 
 
 # Step 1.5 Retrieve appRoleId
-resource_id = '021e3997-c279-4b56-8bb2-5dfb3f5baa63' # Application ID of Enterprise Application
+resource_id = 'XXX' # Application ID of Enterprise Application
 
 headers = {
     'Authorization': 'Bearer ' + access_token
 }
 
-url = 'https://graph.microsoft.com/v1.0/servicePrincipals/7a0480d3-2d7a-42c6-906b-cd9baea8dd61'
+url = 'https://graph.microsoft.com/v1.0/servicePrincipals/{}'.format(resource_id)
 
 r = requests.get(url=url, headers=headers)
 resp = r.json()
@@ -50,8 +50,8 @@ print(app_role_id)
 
 
 # Step 2: Assign group to Enterprise App
-principal_id = '2725512a-4d0e-4136-a5b5-a1ba9952e48b' # Object ID of the Azure AD Security Group
-resource_id = '7a0480d3-2d7a-42c6-906b-cd9baea8dd61'  # Object ID of the Enterprise Application
+principal_id = 'XXX' # Object ID of the Azure AD Security Group
+resource_id = 'XXX'  # Object ID of the Enterprise Application
 app_role_id = app_role_id  # ID of the App Role
 
 headers = {
