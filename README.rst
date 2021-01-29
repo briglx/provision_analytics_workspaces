@@ -12,11 +12,34 @@ This project demonstrates how to provision analytics workspaces on Azure using s
 
 |screenshot-pipeline|
 
+Workflow:
+
+- Begin with an http request to a function app
+- The function app starts a container instance for a specific docker image
+- The Docker image has the python code to create new resources in Azure such as 
+    - Storage Blobs
+    - Active Directory Users and Groups
+    - Databricks Cluster
+    - Permission for access
+
 Setup
 =====
 
-Resource Group
---------------
+This setup will deploy the core infrastructure needed to run the the solution. There are two phases:
+
+- Phase 1: Core infrastructure
+    - Resource Group
+    - Container Registry
+    - Service Principal - (Permission to Read from Docker Registry)
+    - Function App
+- Phase 2: Container
+    - Docker Image
+    - Container Instance
+
+Phase 1
+-------
+
+**Resource Group**
 
 Create a resource group for this project
 
@@ -24,10 +47,9 @@ Create a resource group for this project
 
     az group create --name provisionAnalyticsWorkspaces --location eastus
 
-Docker Registry
----------------
+**Container Repository**
 
-Create a Private Docker Reposity in Azure
+Create a Private Docker Container Reposity in Azure
 
 .. code-block:: bash
 
@@ -35,8 +57,7 @@ Create a Private Docker Reposity in Azure
 
 Take note of ``loginServer`` in the output, which is the fully qualified registry name (all lowercase). Throughout the rest of this document ``<registry-name>`` is a placeholder for the container registry name, and ``<login-server>`` is a placeholder for the registry's login server name.
 
-Service Principal
------------------
+**Service Principal**
 
 Create a Service Principal on Azure (Pull Images).
 
@@ -50,8 +71,7 @@ Create the service principal and save the secrets
 
 Notice the username and password are saved to the file `local-sp.json`
 
-Role assignment
----------------
+**Role assignment**
 
 Next we have to assign the `Azure Container Registry Pull` role-assignment to the new service principal
 
@@ -67,15 +87,8 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
     # Show the role assignment
     az role assignment list --assignee $SERVICE_PRINCIPAL_ID
 
-Azure Container Instance
-------------------------
+**Function App**
 
-You will need to create an Azure Container Instance once you have created the docker image. See development deployment notes below.
-
-
-
-Function App
-------------
 This Azure Functions is the trigger to start the container. The function app is created using the Consumption plan, which is ideal for event-driven serverless workloads.
 
 .. code-block:: bash
@@ -83,6 +96,15 @@ This Azure Functions is the trigger to start the container. The function app is 
     # The function app needs a storage account.
     az storage account create --name pawstorage4112 --location eastus --resource-group provisionAnalyticsWorkspaces  --sku Standard_LRS
     az functionapp create --name pawfunctionApp --storage-account pawstorage4112 --consumption-plan-location eastus --resource-group provisionAnalyticsWorkspaces --os-type linux --runtime python --runtime-version 3.7 --functions-version 2
+
+
+Phase 2
+-------
+
+See the Development section for steps to 
+
+- Build and deploy the docker image
+- Deploy a container instance
 
 
 Development
