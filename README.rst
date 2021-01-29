@@ -70,19 +70,19 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
 Azure Container Instance
 ------------------------
 
-Create Azure Container Instance
+You will need to create an Azure Container Instance once you have created the docker image. See development deployment notes below.
 
-Copy the file `deploy-aci-example.yaml` as `deploy-aci.yaml`
 
-Edit the file `deploy-aci.yaml` and update with the correct values:
 
-- image: the full name of the image 
-- username: the service principal clientId
-- password: the service principal clientSecret
+Function App
+------------
+This Azure Functions is the trigger to start the container. The function app is created using the Consumption plan, which is ideal for event-driven serverless workloads.
 
 .. code-block:: bash
 
-    az container create --resource-group provisionAnalyticsWorkspaces --file deploy-aci.yaml
+    # The function app needs a storage account.
+    az storage account create --name pawstorage4112 --location eastus --resource-group provisionAnalyticsWorkspaces  --sku Standard_LRS
+    az functionapp create --name pawfunctionApp --storage-account pawstorage4112 --consumption-plan-location eastus --resource-group provisionAnalyticsWorkspaces --os-type linux --runtime python --runtime-version 3.7 --functions-version 2
 
 
 Development
@@ -180,11 +180,34 @@ Tag for remote registry
 
 Run the new image on Azure Container Instance
 
+Copy the file `deploy-aci-example.yaml` as `deploy-aci.yaml`
+
+Edit the file `deploy-aci.yaml` and update with the correct values:
+
+- image: the full name of the image 
+- username: the service principal clientId
+- password: the service principal clientSecret
+
+.. code-block:: bash
+
+    az container create --resource-group provisionAnalyticsWorkspaces --file deploy-aci.yaml
+
+
+Deploy Function App
+-------------------
+Publish the function app from command line or with the VSCode extension. 
+
+.. code-block:: bash
+
+    cd /path/to/project/functions
+    func azure functionapp publish pawfunctionApp
+
 
 References
 ==========
 - Create Container Registry https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
 - Create Azure Container Instance https://docs.microsoft.com/en-us/azure/container-instances/container-instances-multi-container-yaml
+- Create Azure Functions https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash
 
 .. |screenshot-pipeline| image:: https://raw.github.com/briglx/provision_analytics_workspaces/master/docs/Architecture.png
 
