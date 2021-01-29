@@ -17,6 +17,7 @@ Workflow:
 - Begin with an http request to a function app
 - The function app starts a container instance for a specific docker image
 - The Docker image has the python code to create new resources in Azure such as 
+    
     - Storage Blobs
     - Active Directory Users and Groups
     - Databricks Cluster
@@ -28,11 +29,14 @@ Setup
 This setup will deploy the core infrastructure needed to run the the solution. There are two phases:
 
 - Phase 1: Core infrastructure
+    
     - Resource Group
     - Container Registry
     - Service Principal - (Permission to Read from Docker Registry)
     - Function App
+
 - Phase 2: Container
+    
     - Docker Image
     - Container Instance
 
@@ -199,6 +203,8 @@ Tag for remote registry
     az acr login --name $ACR_REGISTRY_NAME
     docker push $ACR_REGISTRY_NAME.azurecr.io/provisionanalyticsworkspaces:v4
 
+
+**Deploy Container Instance**
 
 Run the new image on Azure Container Instance
 
