@@ -94,13 +94,18 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
 **Function App**
 
 This Azure Functions is the trigger to start the container. The function app is created using the Consumption plan, which is ideal for event-driven serverless workloads.
+The fucntion uses a managed identity to start the container instance. The managed identity will use a custom role to start the container.
 
 .. code-block:: bash
+
+    # Create the Custom role
+    az role definition create --role-definition docs/custom-role.json
 
     # The function app needs a storage account.
     az storage account create --name pawstorage4112 --location eastus --resource-group provisionAnalyticsWorkspaces  --sku Standard_LRS
     az functionapp create --name pawfunctionApp --storage-account pawstorage4112 --consumption-plan-location eastus --resource-group provisionAnalyticsWorkspaces --os-type linux --runtime python --runtime-version 3.7 --functions-version 2
-
+    az functionapp identity assign --name pawfunctionApp --resource-group provisionAnalyticsWorkspaces --role Container Instance Operator --scope  /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/provisionAnalyticsWorkspaces
+    
 
 Phase 2
 -------
@@ -225,6 +230,8 @@ Deploy Function App
 -------------------
 Publish the function app from command line or with the VSCode extension. 
 
+Copy the ``local.settings.example.json`` to ``local.settings.json`` and replace the palceholder with the correct values:
+
 .. code-block:: bash
 
     cd /path/to/project/functions
@@ -236,6 +243,9 @@ References
 - Create Container Registry https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
 - Create Azure Container Instance https://docs.microsoft.com/en-us/azure/container-instances/container-instances-multi-container-yaml
 - Create Azure Functions https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash
+- Function Managed Identities https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet
+- Azure Resource Provider Operations - Container Instance https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#containers
+- Azure Custom Roles https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles
 
 .. |screenshot-pipeline| image:: https://raw.github.com/briglx/provision_analytics_workspaces/master/docs/Architecture.png
 

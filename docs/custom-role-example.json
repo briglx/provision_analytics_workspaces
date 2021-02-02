@@ -1,0 +1,19 @@
+{
+    "Name": "Container Instance Operator",
+    "IsCustom": true,
+    "Description": "Can monitor and restart container instances.",
+    "Actions": [
+        "Microsoft.ContainerInstance/containerGroups/read",
+        "Microsoft.ContainerInstance/containerGroups/write",
+        "Microsoft.ContainerInstance/containerGroups/delete",
+        "Microsoft.ContainerInstance/containerGroups/restart/action",
+        "Microsoft.ContainerInstance/containerGroups/stop/action",
+        "Microsoft.ContainerInstance/containerGroups/start/action"
+    ],
+    "NotActions": [
+  
+    ],
+    "assignableScopes" : [
+        "/subscriptions/{subscriptionId1}"
+    ]
+  }
