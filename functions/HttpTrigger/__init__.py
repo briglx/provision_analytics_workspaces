@@ -1,11 +1,12 @@
 """Function to start Container Instance."""
 import datetime
-import os
 import json
 import logging
+import os
+
+import azure.functions as func
 from azure.common.client_factory import get_client_from_json_dict
 from azure.mgmt.containerinstance import ContainerInstanceManagementClient
-import azure.functions as func
 
 
 def get_container_client(azure_auth):

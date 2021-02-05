@@ -94,7 +94,7 @@ Next we have to assign the `Azure Container Registry Pull` role-assignment to th
 **Function App**
 
 This Azure Functions is the trigger to start the container. The function app is created using the Consumption plan, which is ideal for event-driven serverless workloads.
-The fucntion uses a managed identity to start the container instance. The managed identity will use a custom role to start the container.
+The function uses a managed identity to start the container instance. The managed identity will use a custom role to start the container.
 
 .. code-block:: bash
 
@@ -194,6 +194,9 @@ Run Docker Image locally
     > docker build --pull --rm -f "dockerfile" -t provisionanalyticsworkspaces:latest "."
     > docker run --rm -it provisionanalyticsworkspaces:latest
 
+    # Run interactive with environment variables
+    > docker run --rm -it --env-file local.env provisionanalyticsworkspaces:latest
+
     #If you want to see STDOUT use 
     > docker run --rm -a STDOUT provisionanalyticsworkspaces:latest
 
@@ -246,6 +249,7 @@ References
 - Function Managed Identities https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet
 - Azure Resource Provider Operations - Container Instance https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#containers
 - Azure Custom Roles https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles
+- Python Client Library - ADLSv2 https://azuresdkdocs.blob.core.windows.net/$web/python/azure-storage-file-datalake/12.2.2/index.html
 
 .. |screenshot-pipeline| image:: https://raw.github.com/briglx/provision_analytics_workspaces/master/docs/Architecture.png
 

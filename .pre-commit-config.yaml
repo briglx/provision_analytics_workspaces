@@ -1,0 +1,35 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+  -   id: check-yaml
+  -   id: end-of-file-fixer
+  -   id: trailing-whitespace
+- repo: https://github.com/psf/black
+  rev: 19.3b0
+  hooks:
+  -   id: black
+      args:
+        - --safe
+        - --quiet
+      files: ^(.+)?[^/]+\.py$
+- repo: https://github.com/codespell-project/codespell
+  rev: v1.17.1
+  hooks:
+    - id: codespell
+      args:
+        - --skip="./.*,*.pyc,*.png,./static/js/bootstrap*,./static/css/bootstrap*,*.vsdx"
+        - --quiet-level=2
+      exclude: ^.*static\/(js|css)\/bootstrap.*\.(js|map)$
+- repo: https://github.com/pycqa/flake8
+  rev: 3.8.4
+  hooks:
+    - id: flake8
+      additional_dependencies:
+        - flake8-docstrings==1.5.0
+        - pydocstyle==5.1.1
+      files: ^.+\.py$
+- repo: https://github.com/pycqa/isort
+  rev: 5.5.3
+  hooks:
+    - id: isort
