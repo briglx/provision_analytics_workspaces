@@ -15,6 +15,6 @@ RUN pip install -r requirements.txt
 
 COPY script/*.py .
 
-# ENTRYPOINT [ "/bin/bash" ]
-ENTRYPOINT ["/usr/local/bin/python", "/app/main.py"]
+ENTRYPOINT [ "/bin/bash" ]
+# ENTRYPOINT ["/usr/local/bin/python", "/app/main.py"]
 # CMD ["-c default"]

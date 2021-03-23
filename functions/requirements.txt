@@ -2,6 +2,10 @@
 # The Python Worker is managed by Azure Functions platform
 # Manually managing azure-functions-worker may cause unexpected issues
 
+azure-common
+azure-core
 azure-functions
-requests
-azure-mgmt-containerinstance==1.5.0
+azure-identity
+azure-mgmt-containerinstance
+azure-mgmt-core
+azure-mgmt-resource

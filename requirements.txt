@@ -1,1 +1,8 @@
 azure-storage-file-datalake
+
+# To create docker images Testings
+azure-common==1.1.26
+azure-core==1.10.0
+azure-identity==1.5.0
+azure-mgmt-containerinstance==7.0.0
+azure-mgmt-core==1.2.2

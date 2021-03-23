@@ -119,6 +119,16 @@ See the Development section for steps to
 Development
 ===========
 
+Setup your dev environment by creating a virtual environment
+
+.. code-block:: bash
+
+    # virtualenv \path\to\.venv -p path\to\specific_version_python.exe
+    python -m venv .venv.
+    .venv\scripts\activate
+
+    deactivate
+
 Style Guidelines
 ----------------
 
@@ -240,6 +250,13 @@ Copy the ``local.settings.example.json`` to ``local.settings.json`` and replace 
     cd /path/to/project/functions
     func azure functionapp publish pawfunctionApp
 
+Common Issues
+=============
+
+- No module found.
+    - Be sure to run in a virtual environment
+- `No module named azure.cli`
+  
 
 References
 ==========
@@ -250,6 +267,7 @@ References
 - Azure Resource Provider Operations - Container Instance https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#containers
 - Azure Custom Roles https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles
 - Python Client Library - ADLSv2 https://azuresdkdocs.blob.core.windows.net/$web/python/azure-storage-file-datalake/12.2.2/index.html
+- Sample Container Code https://github.com/Azure-Samples/aci-docs-sample-python/blob/master/src/aci_docs_sample.py
 
 .. |screenshot-pipeline| image:: https://raw.github.com/briglx/provision_analytics_workspaces/master/docs/Architecture.png
 
